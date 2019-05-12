@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title>Test replacing html in page</title>
+</head>
+
+<body>
+    <button class="btn">Click Me</button>
+    <h1 class="repozes">Hello World</h1>
+</body>
+<script>
+    const replace = document.querySelector('.repozes');
+    const btn = document.querySelector('.btn');
+    function replaceHTML() {
+        const fruit = `<li>There are ${5*4} pieces of fruit in the basket</li>
+        <img src='https://www.gifttree.com/images/gt_large/41e_The-Orchard-Fruit-Basket.jpg';
+ alt="there was">`
+       replace.innerHTML = fruit;
+    }
+
+    document.addEventListener('click',replaceHTML)
+</script>
+<style>
+div{
+
+}
+</style>
+</html>
