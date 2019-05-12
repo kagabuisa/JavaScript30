@@ -25,8 +25,8 @@
   <style>
     :root {
       --base: #ffc600;
-      --spacing: 1px;
-      --blur: 10px;
+      --spacing: 5px;
+      --blur: 1px;
     }
 
     img {
@@ -65,7 +65,8 @@
     function updateHandle() {
       const suffix = this.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-      console.log(this.name);
+      console.log(document.documentElement.nodeName + " is an Element");
+
     };
     const inputs = document.querySelectorAll('.controls input')
     inputs.forEach(input => input.addEventListener('change', updateHandle));
