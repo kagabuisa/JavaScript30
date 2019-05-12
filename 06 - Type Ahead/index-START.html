@@ -16,6 +16,48 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+let datax = []
+fetch(endpoint)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    datax = myJson
+    // console.table(JSON.stringify(myJson));
+  });
+
+  function findCity(findMatch,datax){
+return datax.filter(place => {
+  const regex = new RegExp(findMatch,'gi')
+return place.city.match(regex) || place.state.match(regex )
+});
+  }
+
+  function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+  function displaySearchResults(){
+    const found = findCity(this.value,datax);
+const html = found.map(place => {
+  const regex = new RegExp(this.value,'gi')
+  const cityName = place.city.replace(regex,`<span class="hl">${this.value}</span>`)
+  const stateName = place.state.replace(regex,`<span class="hl">${this.value}</span>`)
+  return `
+  <li>
+  <span class="name">${cityName}, ${stateName}</span>
+  <span class="name">${formatNumber(place.population)}</span>
+  </li>
+  `
+}).join('');
+suggestions.innerHTML = html;
+  }
+
+  const searchInput = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions')
+
+  searchInput.addEventListener('change',displaySearchResults);
+  searchInput.addEventListener('keyup',displaySearchResults);
 
 </script>
 </body>
